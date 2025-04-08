@@ -25,7 +25,7 @@ SECRET_KEY = 'p6dj^b=5t(w@6&2dbv=(e6tr%jr%d5ctc16lpmuruan1n6ycj@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['quora-d7n8.onrender.com','127.0.0.1:8000', '*']
 
 
 # Application definition
