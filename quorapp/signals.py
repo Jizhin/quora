@@ -13,6 +13,6 @@ def post_save_question(sender, created, instance, **kwargs):
             "live_data_live_data" ,
             {
                 'type': 'send_live_data' ,
-                'message': json.dumps(data)
+                'message': f"New question added by {instance.author.username} at {datetime.now()}"
             }
         )

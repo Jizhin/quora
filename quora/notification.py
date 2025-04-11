@@ -23,6 +23,4 @@ class NotificationConsumer(AsyncJsonWebsocketConsumer):
         import time
         data = json.loads(text_data)
         if 'message' in data and data['message']:
-            await self.send(text_data=json.dumps({
-                'message': data.get('message')
-            }))
+            await self.send(text_data={'message': data.get('message')})
