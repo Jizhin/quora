@@ -30,4 +30,4 @@ jobs:
         run: python manage.py test
 
       - name: Build Docker image
-        run: docker build -t quora-web .
+        run: docker-compose up --build
