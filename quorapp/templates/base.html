@@ -133,39 +133,21 @@
     <script src="/static/js/main.js"></script>
 
     <script>
-        {% if user.is_authenticated %}
-        const socket = new WebSocket(
-            (window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/ws/notifications/"
-        );
+const socket = new WebSocket(
+    (window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/ws/notifications/"
+);
 
-        socket.onmessage = function (event) {
-            const data = JSON.parse(event.data);
-            showTopNotification(data.message);
-        };
+socket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    console.log("WebSocket message:", data.message);
+    const alert = document.createElement('div');
+    alert.className = 'alert alert-info position-fixed top-0 start-50 translate-middle-x mt-3';
+    alert.style.zIndex = 1050;
+    alert.innerText = data.message;
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 3000);
+};
+</script>
 
-        function showTopNotification(message) {
-            const wrapper = document.getElementById("live-notification-wrapper");
-
-            const alert = document.createElement("div");
-            alert.className = "alert alert-info alert-dismissible fade show";
-            alert.style.minWidth = "300px";
-            alert.style.maxWidth = "600px";
-            alert.style.margin = "auto";
-            alert.innerHTML = `
-                <strong>🔔 Notification:</strong> ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-
-            wrapper.appendChild(alert);
-
-            // Auto-dismiss after 5 seconds
-            setTimeout(() => {
-                alert.classList.remove("show");
-                alert.classList.add("hide");
-                setTimeout(() => alert.remove(), 500);
-            }, 5000);
-        }
-        {% endif %}
-    </script>
 </body>
 </html>
